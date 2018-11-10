@@ -5,10 +5,22 @@
  */
 package com.myapp.model;
 
-/**
- *
- * @author ultra
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Secretaria extends Empregado {
-    
+     @Id
+    @GeneratedValue
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+     
 }

@@ -5,14 +5,29 @@
  */
 package com.myapp.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  *
  * @author ultra
  */
+@Entity
 public class PessoaFisica {
     private String cpf;
     private String rg;
+     @Id
+    @GeneratedValue
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getCpf() {
         return cpf;
     }

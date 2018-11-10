@@ -20,6 +20,14 @@ public class Endereco {
     @GeneratedValue
     private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescricao() {
         return descricao;
     }
