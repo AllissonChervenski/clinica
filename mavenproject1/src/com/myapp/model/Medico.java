@@ -4,15 +4,15 @@ package com.myapp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 @Entity
-public class Medico
+public class Medico extends Empregado
 {
     @Id
     @GeneratedValue
     private int id;
     private String crm;
-
+    
+  
     public int getId()
     {
         return id;

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Paciente
+public class Paciente extends Pessoa
 {
     @Id
     @GeneratedValue

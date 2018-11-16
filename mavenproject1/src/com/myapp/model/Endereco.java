@@ -5,7 +5,7 @@
  */
 package com.myapp.model;
 
-import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,8 +15,7 @@ import javax.persistence.Id;
  * @author ultra
  */
 @Entity
-public class Endereco implements Serializable{
-    private String descricao;
+public class Endereco{
     @Id
     @GeneratedValue
     private int id;
@@ -28,6 +27,9 @@ public class Endereco implements Serializable{
     public void setId(int id) {
         this.id = id;
     }
+   
+    private String descricao;
+   
 
     public String getDescricao() {
         return descricao;
@@ -36,4 +38,6 @@ public class Endereco implements Serializable{
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+  
 }

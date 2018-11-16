@@ -1,10 +1,14 @@
 package com.myapp.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Pessoa {
 
 	@Id
@@ -13,6 +17,8 @@ public abstract class Pessoa {
 	private String nome;
         private String senha;
         private String login;
+        
+
 
     public String getSenha() {
         return senha;

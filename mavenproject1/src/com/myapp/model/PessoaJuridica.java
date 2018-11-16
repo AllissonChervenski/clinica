@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class PessoaJuridica {
+public class PessoaJuridica extends Pessoa{
     private String cnpj;
     private String razaoSocial;
     @Id

@@ -14,10 +14,10 @@ import javax.persistence.Id;
  * @author ultra
  */
 @Entity
-public class PessoaFisica {
+public class PessoaFisica extends Pessoa{
     private String cpf;
     private String rg;
-     @Id
+    @Id
     @GeneratedValue
     private int id;
 

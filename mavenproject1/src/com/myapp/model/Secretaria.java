@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Secretaria extends Empregado {
-     @Id
+    @Id
     @GeneratedValue
     private int id;
 
