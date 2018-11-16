@@ -1,14 +1,8 @@
 package com.myapp.test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import javax.persistence.EntityManager;
 
 import com.boraji.tutorial.hibernate.JPAUtil;
-import com.myapp.model.Empregado;
-import com.myapp.model.Paciente;
-import com.myapp.model.Pessoa;
 
 public class CriaPessoa {
 

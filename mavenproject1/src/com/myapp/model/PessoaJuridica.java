@@ -9,10 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity/**
- *
- * @author ultra
- */
+@Entity
 public class PessoaJuridica {
     private String cnpj;
     private String razaoSocial;
