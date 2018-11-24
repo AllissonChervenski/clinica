@@ -20,7 +20,15 @@ public class PessoaFisica extends Pessoa{
     @Id
     @GeneratedValue
     private int id;
+    private Pessoa pessoa;
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
     public int getId() {
         return id;
     }
