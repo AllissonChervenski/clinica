@@ -1,11 +1,17 @@
 package com.myapp.model;
 
 
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -14,11 +20,34 @@ public abstract class Pessoa {
 	@Id
 	@GeneratedValue
 	private int id;
-	private String nome;
         private String senha;
         private String login;
         
+        @Column(length=100, nullable=false)
+	private String nome;
+	
+	@Column(name="DTN")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+	
+	@OneToOne(mappedBy="pessoa",cascade= {CascadeType.REMOVE,CascadeType.MERGE} )
+	private Endereco endereco;
 
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
     public String getSenha() {
         return senha;
