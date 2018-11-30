@@ -3,7 +3,6 @@ package com.myapp.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,9 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.myapp.controller.SalvarProntuarioController;
-import com.myapp.model.Empregado;
-import com.myapp.model.Endereco;
-import com.myapp.model.Pessoa;
 import com.myapp.model.Prontuario;
 
 public class CadastroProntuario extends JFrame
@@ -30,17 +26,11 @@ public class CadastroProntuario extends JFrame
 
     private JPanel painelConteudo;
     private JLabel labelObjetivo;
-    private JLabel labelSubjetivo;
-    private JLabel labelAvaliacao;
-    private JLabel labelDta;
     private JButton btSalvar;
     private JTextField objetivoTextField;
-    private JTextField subjetivoTextField;
-    private JTextField avaliacaoTextField;
-    private JTextField dtaTextField;
     private JButton novoProntuario;
 
-    public CadastroProntuario(Pessoa pessoa)
+    public CadastroProntuario(Prontuario prontuario)
     {
         setTitle("Cadastrar Prontuario");
         this.prontuario = prontuario;
@@ -71,53 +61,24 @@ public class CadastroProntuario extends JFrame
         painelConteudo.setLocation(0, 0);
         painelConteudo.setLayout(null);
 //		painelConteudo.setLayout(new GridLayout(2,2));
+
         labelObjetivo = new JLabel("Objetivo:");
         labelObjetivo.setSize(100, 20);
         labelObjetivo.setLocation(10, 20);
         painelConteudo.add(labelObjetivo);
 
-        painelPrincipal.add(painelConteudo);
-
         objetivoTextField = new JTextField();
         objetivoTextField.setSize(400, 20);
-        objetivoTextField.setLocation(110, 20);
+        objetivoTextField.setLocation(150, 20);
         painelConteudo.add(objetivoTextField);
 
-        labelSubjetivo = new JLabel("Subjetivo:");
-        labelSubjetivo.setSize(100, 20);
-        labelSubjetivo.setLocation(10, 50);
-        painelConteudo.add(labelSubjetivo);
-
-        subjetivoTextField = new JTextField();
-        subjetivoTextField.setSize(400, 20);
-        subjetivoTextField.setLocation(110, 50);
-        painelConteudo.add(subjetivoTextField);
-
-        labelAvaliacao = new JLabel("Avaliação:");
-        labelAvaliacao.setSize(100, 20);
-        labelAvaliacao.setLocation(10, 80);
-        painelConteudo.add(labelAvaliacao);
-
-        avaliacaoTextField = new JTextField();
-        avaliacaoTextField.setSize(400, 20);
-        avaliacaoTextField.setLocation(110, 80);
-        painelConteudo.add(avaliacaoTextField);
-
-        labelDta = new JLabel("Data:");
-        labelDta.setSize(100, 20);
-        labelDta.setLocation(10, 110);
-        painelConteudo.add(labelDta);
-
-        dtaTextField = new JTextField();
-        dtaTextField.setSize(400, 20);
-        dtaTextField.setLocation(110, 110);
-        painelConteudo.add(dtaTextField);
+        painelPrincipal.add(painelConteudo);
 
         ActionListener al = new SalvarProntuarioController(this, prontuario);
 
         btSalvar.addActionListener(al);
 
-        novoProntuario = new JButton("Nova");
+        novoProntuario = new JButton("Novo");
         jp.add(novoProntuario);
 
         novoProntuario.addActionListener(new ActionListener()
@@ -135,9 +96,11 @@ public class CadastroProntuario extends JFrame
     public static void main(String args[])
     {
         Prontuario p = new Prontuario();
-        p.setObjetivo("Braço deslocado");
-        p.setSubjetivo("Fratura no antebraço");
-        p.setAvaliacao("Geso urgente para o braço");
+        p.setObjetivo("braço");
+
+        CadastroProntuario cf = new CadastroProntuario(p);
+        cf.editProntuario();
+        cf.setVisible(true);
     }
 
     public JPanel getPainelPrincipal()
@@ -160,14 +123,14 @@ public class CadastroProntuario extends JFrame
         this.painelConteudo = painelConteudo;
     }
 
-    public JLabel getLabelObjetivo()
+    public JButton getBtSalvar()
     {
-        return labelObjetivo;
+        return btSalvar;
     }
 
-    public void setLabelObjetivo(JLabel labelObjetivo)
+    public void setBtSalvar(JButton btSalvar)
     {
-        this.labelObjetivo = labelObjetivo;
+        this.btSalvar = btSalvar;
     }
 
     public JTextField getObjetivoTextField()
@@ -180,90 +143,10 @@ public class CadastroProntuario extends JFrame
         this.objetivoTextField = objetivoTextField;
     }
 
-    public JTextField getSubjetivoTextField()
-    {
-        return subjetivoTextField;
-    }
-
-    public void setSubjetivoTextField(JTextField subjetivoTextField)
-    {
-        this.subjetivoTextField = subjetivoTextField;
-    }
-
-    public JTextField getAvaliacaoTextField()
-    {
-        return avaliacaoTextField;
-    }
-
-    public void setAvaliacaoTextField(JTextField avaliacaoTextField)
-    {
-        this.avaliacaoTextField = avaliacaoTextField;
-    }
-
-    public JLabel getLabelSubjetivo()
-    {
-        return labelSubjetivo;
-    }
-
-    public void setLabelSubjetivo(JLabel labelSubjetivo)
-    {
-        this.labelSubjetivo = labelSubjetivo;
-    }
-
-    public JLabel getLabelAvaliacao()
-    {
-        return labelAvaliacao;
-    }
-
-    public void setLabelAvaliacao(JLabel labelAvaliacao)
-    {
-        this.labelAvaliacao = labelAvaliacao;
-    }
-
-    public JLabel getLabelDta()
-    {
-        return labelDta;
-    }
-
-    public void setLabelDta(JLabel labelDta)
-    {
-        this.labelDta = labelDta;
-    }
-
-    public JButton getBtSalvar()
-    {
-        return btSalvar;
-    }
-
-    public void setBtSalvar(JButton btSalvar)
-    {
-        this.btSalvar = btSalvar;
-    }
-
-    public JTextField getNomeTextField()
-    {
-        return objetivoTextField;
-    }
-
-    public void setNomeTextField(JTextField nomeTextField)
-    {
-        this.objetivoTextField = nomeTextField;
-    }
-
-    public JTextField getEnderecoTextField()
-    {
-        return subjetivoTextField;
-    }
-
-    public void setEnderecoTextField(JTextField enderecoTextField)
-    {
-        this.subjetivoTextField = enderecoTextField;
-    }
-
     public void notifyCadastroSucesso()
     {
-        JOptionPane.showMessageDialog(this, "Prontuario " + "" + prontuario.getObjetivo() + " " + "cadastrado com sucesso");
-        setTitle("Edicao de Prontuario");
+        JOptionPane.showMessageDialog(this, "Prontuario " + "" + prontuario.getObjetivo() + " " + "cadastrada com sucesso");
+        setTitle("Edição de Prontuario");
         btSalvar.setText("Atualizar");
     }
 
@@ -271,17 +154,13 @@ public class CadastroProntuario extends JFrame
     {
         prontuario.setId(0);
         prontuario.setObjetivo("");
-        prontuario.setSubjetivo("");
-        prontuario.setAvaliacao("");
+
         editProntuario();
     }
 
     public void editProntuario()
     {
         getObjetivoTextField().setText(prontuario.getObjetivo());
-        getSubjetivoTextField().setText(prontuario.getSubjetivo());
-        getAvaliacaoTextField().setText(prontuario.getAvaliacao());
-
         if (prontuario.getObjetivo() == null || prontuario.getObjetivo().trim().equals("")) {
             btSalvar.setText("Salvar");
         } else {
@@ -292,7 +171,5 @@ public class CadastroProntuario extends JFrame
     public void bindProntuario()
     {
         prontuario.setObjetivo(this.getObjetivoTextField().getText());
-        prontuario.setSubjetivo(this.getSubjetivoTextField().getText());
-        prontuario.setAvaliacao(this.getAvaliacaoTextField().getText());
     }
 }
