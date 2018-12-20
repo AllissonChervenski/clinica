@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PacienteDAO {
 
-    public boolean insertPaciente(Paciente item, int id) {
+    public boolean insertPaciente(Paciente item) {
         String sql = "INSERT INTO `paciente` (`dtn`, `email`,`telefone`) VALUES( ? , ? , ? ,?)";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {

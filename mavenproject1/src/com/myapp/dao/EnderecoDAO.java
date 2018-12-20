@@ -10,7 +10,7 @@ import java.util.List;
 
 public class EnderecoDAO {
 
-    public boolean insertEndereco(Endereco item, int id) {
+    public boolean insertEndereco(Endereco item) {
         String sql = "INSERT INTO `endereco` (`rua`) VALUES( ? )";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
