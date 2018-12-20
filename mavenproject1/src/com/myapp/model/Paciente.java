@@ -12,7 +12,10 @@ public class Paciente extends Pessoa
     @Id
     @GeneratedValue
     private int id;
+<<<<<<< Updated upstream
     private Date nascimento;
+=======
+>>>>>>> Stashed changes
     private String email;
     private String telefone;
 
@@ -24,6 +27,7 @@ public class Paciente extends Pessoa
         this.nascimento = nascimento;
     }
 
+<<<<<<< Updated upstream
     public int getId()
     {
         return id;
@@ -33,6 +37,8 @@ public class Paciente extends Pessoa
     {
         this.id = id;
     }
+=======
+>>>>>>> Stashed changes
 
     public String getEmail()
     {

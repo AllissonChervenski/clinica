@@ -32,11 +32,10 @@ public class SalvarPacienteController implements ActionListener{
 			System.out.println("Gravando dados do paciente " + paciente.getNome());
                         if(paciente.getEndereco() != null) {
                             System.out.println("Gravando dados do endereco do paciente " + paciente.getEndereco().getRua());
-			if(paciente.getDataNascimento() != null){
-                            System.out.println("Gravando dados da data de nascimento do paciente " + paciente.getDataNascimento().toString());
+		
                         }
                         }
-		}
+		
 		
 		cadastroPaciente.notifyCadastroSucesso();
 	}

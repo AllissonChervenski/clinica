@@ -14,9 +14,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.myapp.controller.SalvarPacienteController;
+import com.myapp.dao.PacienteDAO;
+import com.myapp.dao.ProntuarioDAO;
 import com.myapp.model.Endereco;
 import com.myapp.model.Paciente;
+import com.myapp.model.Prontuario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CadastroPaciente extends JFrame {
 
@@ -26,7 +33,6 @@ public class CadastroPaciente extends JFrame {
     private Paciente paciente;
     private JPanel painelConteudo;
     private JLabel labelNome;
-    private JLabel labelDataNascimento;
     private JLabel labelTelefone;
     private JTextField telefoneTextField;
     private JTextField emailTextField;
@@ -34,15 +40,6 @@ public class CadastroPaciente extends JFrame {
     private JButton btSalvar;
     private JTextField nomeTextField;
     private JTextField enderecoTextField;
-    private JTextField dtnTextField;
-
-    public JTextField getDtnTextField() {
-        return dtnTextField;
-    }
-
-    public void setDtnTextField(JTextField dtnTextField) {
-        this.dtnTextField = dtnTextField;
-    }
     private JButton novoPaciente;
 
     public CadastroPaciente(Paciente paciente) {
@@ -92,43 +89,33 @@ public class CadastroPaciente extends JFrame {
         labelEndereco.setSize(100, 20);
         labelEndereco.setLocation(10, 50);
         painelConteudo.add(labelEndereco);
-        // data de nascimento email e telefone
+       
 
         enderecoTextField = new JTextField();
         enderecoTextField.setSize(400, 20);
         enderecoTextField.setLocation(150, 50);
         painelConteudo.add(enderecoTextField);
 
-        labelDataNascimento = new JLabel("Data de nascimento:");
-        labelDataNascimento.setSize(200, 20);
-        labelDataNascimento.setLocation(10, 80);
-        painelConteudo.add(labelDataNascimento);
-
-        dtnTextField = new JTextField();
-        dtnTextField.setSize(400, 20);
-        dtnTextField.setLocation(150, 80);
-        painelConteudo.add(dtnTextField);
-
         //email
         labelEmail = new JLabel("Email:");
         labelEmail.setSize(200, 20);
-        labelEmail.setLocation(10, 110);
+        labelEmail.setLocation(10, 80);
         painelConteudo.add(labelEmail);
 
         emailTextField = new JTextField();
         emailTextField.setSize(400, 20);
-        emailTextField.setLocation(150, 110);
+        emailTextField.setLocation(150, 80);
         painelConteudo.add(emailTextField);
 
         //telefone
         labelTelefone = new JLabel("Telefone:");
         labelTelefone.setSize(200, 20);
-        labelTelefone.setLocation(10, 140);
+        labelTelefone.setLocation(10, 110);
         painelConteudo.add(labelTelefone);
 
         telefoneTextField = new JTextField();
         telefoneTextField.setSize(400, 20);
-        telefoneTextField.setLocation(150, 140);
+        telefoneTextField.setLocation(150, 110);
         painelConteudo.add(telefoneTextField);
 
         ActionListener al = new SalvarPacienteController(this, paciente);
@@ -142,7 +129,14 @@ public class CadastroPaciente extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                novoPaciente();
+                    PacienteDAO dao = new PacienteDAO();
+                    Paciente paciente = new Paciente();
+                    paciente.setTelefone(telefoneTextField.getText());
+                    paciente.setEmail(emailTextField.getText());
+                    paciente.setNome(nomeTextField.getText());
+                    dao.insertPaciente(paciente);
+                    //novoPaciente();
+                
             }
         });
 
@@ -154,9 +148,7 @@ public class CadastroPaciente extends JFrame {
 
         Endereco end = new Endereco();
         end.setRua("Jose Bonifácio");
-        
-        Date dataNascimento = new Date();
-        p.setDataNascimento(dataNascimento);
+
         
         p.setEmail("paciente@gmail.com");
         p.setTelefone("99047583");
@@ -230,7 +222,7 @@ public class CadastroPaciente extends JFrame {
         btSalvar.setText("Atualizar");
     }
 
-    public void novoPaciente() {
+    public void novoPaciente() throws ParseException {
         paciente.setId(0);
         paciente.setNome("");
         paciente.getEndereco().setId(0);
@@ -246,7 +238,6 @@ public class CadastroPaciente extends JFrame {
     public void editPaciente() {
         getNomeTextField().setText(paciente.getNome());
         getEnderecoTextField().setText(paciente.getEndereco().getRua());
-        getDtnTextField().setText(paciente.getDataNascimento().toString());
         getEmailTextField().setText(paciente.getEmail());
         getTelefoneTextField().setText(paciente.getTelefone());
         
@@ -288,14 +279,5 @@ public class CadastroPaciente extends JFrame {
 
     public void setTelefoneTextField(JTextField telefoneTextField) {
         this.telefoneTextField = telefoneTextField;
-    }
-
-
-    public JLabel getLabelDataNascimento() {
-        return labelDataNascimento;
-    }
-
-    public void setLabelDataNascimento(JLabel labelDataNascimento) {
-        this.labelDataNascimento = labelDataNascimento;
     }
 }

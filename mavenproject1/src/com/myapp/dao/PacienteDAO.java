@@ -1,7 +1,6 @@
 package com.myapp.dao;
 
 import com.myapp.model.Paciente;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +10,7 @@ import java.util.List;
 public class PacienteDAO {
 
     public boolean insertPaciente(Paciente item) {
+<<<<<<< Updated upstream
         String sql = "INSERT INTO `paciente` (`id_pessoa`, `nascimento`, `email`,`telefone`) VALUES( 1 , ? , ? ,?)";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
@@ -18,6 +18,14 @@ public class PacienteDAO {
             ps.setDate(1, (Date) item.getNascimento());
             ps.setString(2, item.getEmail());
             ps.setString(3, item.getTelefone());
+=======
+        String sql = "INSERT INTO `paciente` ( `email`,`telefone`) VALUES( ? , ? ,?)";
+        java.sql.Connection conexao = ConnectDataBase.getConexao();
+        try {
+            java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, item.getEmail());
+            ps.setString(2, item.getTelefone());
+>>>>>>> Stashed changes
             ps.execute();
             ConnectDataBase.fecharConexao();
             return true;
@@ -56,13 +64,18 @@ public class PacienteDAO {
     }
 
     public boolean updatePaciente(Paciente item) {
-        String sql = "UPDATE `paciente` SET `dtn` = ? , `email` = ? , `telefone` = ? WHERE `paciente`.`id` = ? ";
+        String sql = "UPDATE `paciente` SET  `email` = ? , `telefone` = ? WHERE `paciente`.`id` = ? ";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
+<<<<<<< Updated upstream
             ps.setDate(1, (Date) item.getNascimento());
             ps.setString(2, item.getEmail());
             ps.setString(3, item.getTelefone());
+=======
+            ps.setString(1, item.getEmail());
+            ps.setString(2, item.getTelefone());
+>>>>>>> Stashed changes
             ps.execute();
             ConnectDataBase.fecharConexao();
             return true;
