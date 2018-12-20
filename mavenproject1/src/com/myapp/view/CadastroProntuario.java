@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,7 @@ public class CadastroProntuario extends JFrame
     private JButton novoProntuario;
 
     public CadastroProntuario(Prontuario prontuario) {
+        
         setTitle("Cadastrar Prontuario");
         this.prontuario = prontuario;
         setSize(TAMANHO);
@@ -94,6 +96,8 @@ public class CadastroProntuario extends JFrame
         avaliacaoTextField.setSize(400, 20);
         avaliacaoTextField.setLocation(150, 80);
         painelConteudo.add(avaliacaoTextField);
+        
+        
 
         painelPrincipal.add(painelConteudo);
 
@@ -179,7 +183,6 @@ public class CadastroProntuario extends JFrame
     }
 
     public void novoProntuario() {
-        prontuario.setId(0);
         prontuario.setObjetivo("");
         prontuario.setAvaliacao("");
         prontuario.setSubjetivo("");

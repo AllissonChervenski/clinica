@@ -12,14 +12,13 @@ public class ProntuarioDAO
 {
 
     public boolean insertProntuario(Prontuario item, int id) {
-        String sql = "INSERT INTO `prontuario` (`salarioBase`) VALUES( ? )";
+        String sql = "INSERT INTO `prontuario` (`avaliacao`, `subjetivo`, `objetivo`) VALUES( ?, ?, ? )";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, item.getAvaliacao());
             ps.setString(2, item.getObjetivo());
             ps.setString(3, item.getSubjetivo());
-            ps.setDate(4, (Date) item.getDta());
             ps.execute();
             ConnectDataBase.fecharConexao();
             return true;
@@ -42,7 +41,7 @@ public class ProntuarioDAO
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                String[] dados = new String[4];
+                String[] dados = new String[3];
                 dados[0] = rs.getString("avaliacao");
                 dados[1] = rs.getString("objetivo");
                 dados[2] = rs.getString("subjetivo");
@@ -66,7 +65,6 @@ public class ProntuarioDAO
             ps.setString(1, item.getAvaliacao());
             ps.setString(2, item.getObjetivo());
             ps.setString(3, item.getSubjetivo());
-            ps.setDate(4, (Date) item.getDta());
             ps.execute();
             ConnectDataBase.fecharConexao();
             return true;
