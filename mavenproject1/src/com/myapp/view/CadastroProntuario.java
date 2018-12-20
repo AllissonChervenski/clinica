@@ -29,26 +29,26 @@ public class CadastroProntuario extends JFrame
     private JLabel labelObjetivo;
     private JLabel labelSubjetivo;
     private JLabel labelAvaliacao;
-    private JButton btSalvar;
+//    private JButton btSalvar;
     private JTextField objetivoTextField;
     private JTextField subjetivoTextField;
     private JTextField avaliacaoTextField;
     private JButton novoProntuario;
 
     public CadastroProntuario(Prontuario prontuario) {
-        
+
         setTitle("Cadastrar Prontuario");
         this.prontuario = prontuario;
         setSize(TAMANHO);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         painelPrincipal = new JPanel();
         setContentPane(painelPrincipal);
-        btSalvar = new JButton("Salvar/Atualizar");
+//        btSalvar = new JButton("Salvar/Atualizar");
 
 //		painelPrincipal.setLayout(null);
         painelPrincipal.setLayout(new BorderLayout());
-        btSalvar.setLocation(250, 0);
-        btSalvar.setSize(100, 20);
+//        btSalvar.setLocation(250, 0);
+//        btSalvar.setSize(100, 20);
 
 //		painelPrincipal.add(btSalvar,BorderLayout.SOUTH);
         JButton cancel = new JButton("Cancelar");
@@ -57,7 +57,7 @@ public class CadastroProntuario extends JFrame
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout());
 
-        jp.add(btSalvar);
+//        jp.add(btSalvar);
         jp.add(cancel);
         painelPrincipal.add(jp, BorderLayout.SOUTH);
 
@@ -96,17 +96,34 @@ public class CadastroProntuario extends JFrame
         avaliacaoTextField.setSize(400, 20);
         avaliacaoTextField.setLocation(150, 80);
         painelConteudo.add(avaliacaoTextField);
-        
-        
 
         painelPrincipal.add(painelConteudo);
 
         ActionListener al = new SalvarProntuarioController(this, prontuario);
 
-        btSalvar.addActionListener(al);
-
-        novoProntuario = new JButton("Novo");
+//        btSalvar.addActionListener(al);
+        novoProntuario = new JButton("Salvar");
+        novoProntuario.setLocation(250, 0);
+        novoProntuario.setSize(100, 20);
         jp.add(novoProntuario);
+
+//        btSalvar.addActionListener(new ActionListener()
+//        {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                ProntuarioDAO dao = new ProntuarioDAO();
+//                Prontuario prontuarios = new Prontuario();
+//
+//                prontuarios.setAvaliacao(avaliacaoTextField.getText());
+//                prontuarios.setObjetivo(objetivoTextField.getText());
+//                prontuarios.setSubjetivo(subjetivoTextField.getText());
+//
+//                dao.insertProntuario(prontuarios);
+////                novoProntuario();
+//            }
+//        });
+        novoProntuario.addActionListener(al);
 
         novoProntuario.addActionListener(new ActionListener()
         {
@@ -115,11 +132,11 @@ public class CadastroProntuario extends JFrame
             public void actionPerformed(ActionEvent e) {
                 ProntuarioDAO dao = new ProntuarioDAO();
                 Prontuario prontuarios = new Prontuario();
-                
+
                 prontuarios.setAvaliacao(avaliacaoTextField.getText());
                 prontuarios.setObjetivo(objetivoTextField.getText());
                 prontuarios.setSubjetivo(subjetivoTextField.getText());
-                
+
                 dao.insertProntuario(prontuarios);
 //                novoProntuario();
             }
@@ -132,7 +149,7 @@ public class CadastroProntuario extends JFrame
 //        p.setObjetivo("braço");
 
         CadastroProntuario cf = new CadastroProntuario(p);
-        cf.editProntuario();
+//        cf.editProntuario();
         cf.setVisible(true);
     }
 
@@ -152,14 +169,12 @@ public class CadastroProntuario extends JFrame
         this.painelConteudo = painelConteudo;
     }
 
-    public JButton getBtSalvar() {
-        return btSalvar;
-    }
-
-    public void setBtSalvar(JButton btSalvar) {
-        this.btSalvar = btSalvar;
-    }
-
+//    public JButton getBtSalvar() {
+//        return btSalvar;
+//    }
+//    public void setBtSalvar(JButton btSalvar) {
+//        this.btSalvar = btSalvar;
+//    }
     public JTextField getObjetivoTextField() {
         return objetivoTextField;
     }
@@ -187,7 +202,7 @@ public class CadastroProntuario extends JFrame
     public void notifyCadastroSucesso() {
         JOptionPane.showMessageDialog(this, "Prontuario " + "" + prontuario.getAvaliacao() + " " + "cadastrada com sucesso");
         setTitle("Edição de Prontuario");
-        btSalvar.setText("Atualizar");
+//        btSalvar.setText("Atualizar");
     }
 
     public void novoProntuario() {
@@ -195,19 +210,20 @@ public class CadastroProntuario extends JFrame
         prontuario.setAvaliacao("");
         prontuario.setSubjetivo("");
 
-        editProntuario();
+//        editProntuario();
     }
 
-    public void editProntuario() {
-        getObjetivoTextField().setText(prontuario.getObjetivo());
-        if (prontuario.getObjetivo() == null || prontuario.getObjetivo().trim().equals("")) {
-            btSalvar.setText("Salvar");
-        } else {
-            btSalvar.setText("Atualizar");
-        }
-    }
-
+//    public void editProntuario() {
+//        getObjetivoTextField().setText(prontuario.getObjetivo());
+//        if (prontuario.getObjetivo() == null || prontuario.getObjetivo().trim().equals("")) {
+//            btSalvar.setText("Salvar");
+//        } else {
+//            btSalvar.setText("Atualizar");
+//        }
+//    }
     public void bindProntuario() {
         prontuario.setObjetivo(this.getObjetivoTextField().getText());
+        prontuario.setAvaliacao(this.getAvaliacaoTextField().getText());
+        prontuario.setSubjetivo(this.getSubjetivoTextField().getText());
     }
 }

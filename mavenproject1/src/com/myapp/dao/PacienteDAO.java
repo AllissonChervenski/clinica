@@ -11,11 +11,11 @@ import java.util.List;
 public class PacienteDAO {
 
     public boolean insertPaciente(Paciente item) {
-        String sql = "INSERT INTO `paciente` (`dtn`, `email`,`telefone`) VALUES( ? , ? , ? ,?)";
+        String sql = "INSERT INTO `paciente` (`id_pessoa`, `nascimento`, `email`,`telefone`) VALUES( 1 , ? , ? ,?)";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setDate(1, (Date) item.getDtn());
+            ps.setDate(1, (Date) item.getNascimento());
             ps.setString(2, item.getEmail());
             ps.setString(3, item.getTelefone());
             ps.execute();
@@ -60,7 +60,7 @@ public class PacienteDAO {
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setDate(1, (Date) item.getDtn());
+            ps.setDate(1, (Date) item.getNascimento());
             ps.setString(2, item.getEmail());
             ps.setString(3, item.getTelefone());
             ps.execute();

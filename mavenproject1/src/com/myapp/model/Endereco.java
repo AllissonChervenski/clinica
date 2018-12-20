@@ -68,6 +68,16 @@ public class Endereco {
     private int numero;
 
     private String bairro;
+    
+    private String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
     private String uf;
 

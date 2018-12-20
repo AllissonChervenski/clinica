@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class ConnectDataBase {
 
     private static java.sql.Connection conexao;
-    private static final String URL_CONEXAO = "jdbc:mysql://localhost/clinica";
+    private static final String URL_CONEXAO = "jdbc:mysql://127.02.0.1:3306/clinica?useTimezone=true&serverTimezone=UTC";
     private static final String USUARIO = "root";
     private static final String SENHA = "";  
 
@@ -25,7 +25,7 @@ public class ConnectDataBase {
         if (conexao == null) {
 
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
                 conexao = DriverManager.getConnection(URL_CONEXAO, USUARIO, SENHA);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

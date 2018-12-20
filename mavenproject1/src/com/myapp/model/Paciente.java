@@ -12,9 +12,17 @@ public class Paciente extends Pessoa
     @Id
     @GeneratedValue
     private int id;
-    private Date dtn;
+    private Date nascimento;
     private String email;
     private String telefone;
+
+    public Date getNascimento() {
+        return nascimento;
+    }
+
+    public void setNascimento(Date nascimento) {
+        this.nascimento = nascimento;
+    }
 
     public int getId()
     {
@@ -24,16 +32,6 @@ public class Paciente extends Pessoa
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public Date getDtn()
-    {
-        return dtn;
-    }
-
-    public void setDtn(Date dtn)
-    {
-        this.dtn = dtn;
     }
 
     public String getEmail()

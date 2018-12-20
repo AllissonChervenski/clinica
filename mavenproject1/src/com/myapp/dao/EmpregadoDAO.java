@@ -10,7 +10,7 @@ import java.util.List;
 public class EmpregadoDAO {
 
     public boolean insertEmpregado(Empregado item) {
-        String sql = "INSERT INTO `empregado` (`salarioBase`) VALUES( ? )";
+        String sql = "INSERT INTO `empregado` (`id_pessoa`, `salarioBase`) VALUES(1, ? )";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);

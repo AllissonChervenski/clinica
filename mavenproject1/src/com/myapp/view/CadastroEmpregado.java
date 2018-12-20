@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.myapp.controller.SalvarEmpregadoController;
-import com.myapp.model.Endereco;
+import com.myapp.dao.EmpregadoDAO;
 import com.myapp.model.Empregado;
 import com.myapp.model.Pessoa;
 
-public class CadastroEmpregado extends JFrame {
+public class CadastroEmpregado extends JFrame
+{
 
     public static final Dimension TAMANHO = new Dimension(600, 400);
 
@@ -26,19 +27,10 @@ public class CadastroEmpregado extends JFrame {
     private Pessoa pessoa;
     private JPanel painelConteudo;
     private JLabel labelNome;
-    private JLabel labelEndereco;
-    private JButton btSalvar;
-    private JTextField nomeTextField;
-    private JTextField enderecoTextField;
-    private JTextField dtnTextField;
+    private JLabel labelSalarioBase;
+//    private JButton btSalvar;
+    private JTextField salarioBaseTextField;
 
-    public JTextField getDtnTextField() {
-        return dtnTextField;
-    }
-
-    public void setDtnTextField(JTextField dtnTextField) {
-        this.dtnTextField = dtnTextField;
-    }
     private JButton novaPessoa;
 
     public CadastroEmpregado(Pessoa pessoa) {
@@ -48,12 +40,12 @@ public class CadastroEmpregado extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         painelPrincipal = new JPanel();
         setContentPane(painelPrincipal);
-        btSalvar = new JButton("Salvar/Atualizar");
+//        btSalvar = new JButton("Salvar/Atualizar");
 
 //		painelPrincipal.setLayout(null);
         painelPrincipal.setLayout(new BorderLayout());
-        btSalvar.setLocation(250, 0);
-        btSalvar.setSize(100, 20);
+//        btSalvar.setLocation(250, 0);
+//        btSalvar.setSize(100, 20);
 
 //		painelPrincipal.add(btSalvar,BorderLayout.SOUTH);
         JButton cancel = new JButton("Cancelar");
@@ -62,7 +54,7 @@ public class CadastroEmpregado extends JFrame {
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout());
 
-        jp.add(btSalvar);
+//        jp.add(btSalvar);
         jp.add(cancel);
         painelPrincipal.add(jp, BorderLayout.SOUTH);
 
@@ -72,40 +64,38 @@ public class CadastroEmpregado extends JFrame {
         painelConteudo.setLayout(null);
         //painelConteudo.setLayout(new GridLayout(2,2));
 
-        labelNome = new JLabel("Nome:");
-        labelNome.setSize(100, 20);
-        labelNome.setLocation(10, 20);
-        painelConteudo.add(labelNome);
+        labelSalarioBase = new JLabel("Salario Base:");
+        labelSalarioBase.setSize(100, 20);
+        labelSalarioBase.setLocation(10, 50);
+        painelConteudo.add(labelSalarioBase);
 
-        nomeTextField = new JTextField();
-        nomeTextField.setSize(400, 20);
-        nomeTextField.setLocation(150, 20);
-        painelConteudo.add(nomeTextField);
+        salarioBaseTextField = new JTextField();
+        salarioBaseTextField.setSize(400, 20);
+        salarioBaseTextField.setLocation(150, 50);
+        painelConteudo.add(salarioBaseTextField);
 
         painelPrincipal.add(painelConteudo);
 
-        labelEndereco = new JLabel("Endereco:");
-        labelEndereco.setSize(100, 20);
-        labelEndereco.setLocation(10, 50);
-        painelConteudo.add(labelEndereco);
-        // data de nascimento email e telefone
-
-        enderecoTextField = new JTextField();
-        enderecoTextField.setSize(400, 20);
-        enderecoTextField.setLocation(150, 50);
-        painelConteudo.add(enderecoTextField);
-
         ActionListener al = new SalvarEmpregadoController(this, pessoa);
 
-        btSalvar.addActionListener(al);
+        
 
-        novaPessoa = new JButton("Nova");
+        novaPessoa = new JButton("Salvar");
         jp.add(novaPessoa);
+        
+        novaPessoa.addActionListener(al);
 
-        novaPessoa.addActionListener(new ActionListener() {
+        novaPessoa.addActionListener(new ActionListener()
+        {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                EmpregadoDAO dao = new EmpregadoDAO();
+                Empregado empregados = new Empregado();
+                float salarioBase = Float.parseFloat(salarioBaseTextField.getText());
+                empregados.setSalarioBase(salarioBase);
+
+                dao.insertEmpregado(empregados);
                 novaPessoa();
             }
         });
@@ -113,16 +103,16 @@ public class CadastroEmpregado extends JFrame {
     }
 
     public static void main(String args[]) {
-        Pessoa p = new Empregado();
-        p.setNome("Fabio");
+        Empregado emp = new Empregado();
+//        p.setNome("Fabio");
+//
+//        Endereco end = new Endereco();
+//        end.setRua("Joz� Bonif�cio");
 
-        Endereco end = new Endereco();
-        end.setRua("Joz� Bonif�cio");
+//        p.setEndereco(end);
 
-        p.setEndereco(end);
-
-        CadastroEmpregado ce = new CadastroEmpregado(p);
-        ce.editPessoa();
+        CadastroEmpregado ce = new CadastroEmpregado(emp);
+//        ce.editPessoa();
         ce.setVisible(true);
     }
 
@@ -150,63 +140,55 @@ public class CadastroEmpregado extends JFrame {
         this.labelNome = labelNome;
     }
 
-    public JLabel getLabelEndereco() {
-        return labelEndereco;
+    public JLabel getLabelSalarioBase() {
+        return labelSalarioBase;
     }
 
     public void setLabelEndereco(JLabel labelEndereco) {
-        this.labelEndereco = labelEndereco;
+        this.labelSalarioBase = labelEndereco;
     }
 
-    public JButton getBtSalvar() {
-        return btSalvar;
-    }
+//    public JButton getBtSalvar() {
+//        return btSalvar;
+//    }
+//
+//    public void setBtSalvar(JButton btSalvar) {
+//        this.btSalvar = btSalvar;
+//    }
 
-    public void setBtSalvar(JButton btSalvar) {
-        this.btSalvar = btSalvar;
-    }
-
-    public JTextField getNomeTextField() {
-        return nomeTextField;
+    public JTextField getSalarioBaseTextField() {
+        return salarioBaseTextField;
     }
 
     public void setNomeTextField(JTextField nomeTextField) {
-        this.nomeTextField = nomeTextField;
-    }
-
-    public JTextField getEnderecoTextField() {
-        return enderecoTextField;
-    }
-
-    public void setEnderecoTextField(JTextField enderecoTextField) {
-        this.enderecoTextField = enderecoTextField;
+        this.salarioBaseTextField = nomeTextField;
     }
 
     public void notifyCadastroSucesso() {
         JOptionPane.showMessageDialog(this, "Pessoa " + "" + pessoa.getNome() + " " + "cadastrada com sucesso");
         setTitle("Edi��o de Funcion�rio");
-        btSalvar.setText("Atualizar");
+//        btSalvar.setText("Atualizar");
     }
 
     public void novaPessoa() {
         pessoa.setId(0);
         pessoa.setNome("");
         pessoa.getEndereco().setRua("");
-        editPessoa();
+//        editPessoa();
     }
 
-    public void editPessoa() {
-        getNomeTextField().setText(pessoa.getNome());
-        getEnderecoTextField().setText(pessoa.getEndereco().getRua());
-        if (pessoa.getNome() == null || pessoa.getNome().trim().equals("")) {
-            btSalvar.setText("Salvar");
-        } else {
-            btSalvar.setText("Atualizar");
-        }
-    }
+//    public void editPessoa() {
+//        getSalarioBaseTextField().setText(pessoa.getNome());
+//        getSalarioBaseTextField().setText(pessoa.getEndereco().getRua());
+//        if (pessoa.getNome() == null || pessoa.getNome().trim().equals("")) {
+//            btSalvar.setText("Salvar");
+//        } else {
+//            btSalvar.setText("Atualizar");
+//        }
+//    }
 
     public void bindPessoa() {
-        pessoa.setNome(this.getNomeTextField().getText());
-        pessoa.getEndereco().setRua(this.getEnderecoTextField().getText());
+        pessoa.setNome(this.getSalarioBaseTextField().getText());
+        pessoa.getEndereco().setRua(this.getSalarioBaseTextField().getText());
     }
 }

@@ -11,7 +11,7 @@ public class ProntuarioDAO
 {
 
     public boolean insertProntuario(Prontuario item) {
-        String sql = "INSERT INTO `prontuario` (`avaliacao`, `subjetivo`, `objetivo`) VALUES( ?, ?, ? )";
+        String sql = "INSERT INTO `prontuario` (`id_paciente`, `id_medico`, `avaliacao`, `subjetivo`, `objetivo`) VALUES(1, 1, ?, ?, ? )";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);
@@ -25,7 +25,6 @@ public class ProntuarioDAO
             e.printStackTrace();
             return false;
         }
-
     }
 
     public List<String[]> selectAll() {
