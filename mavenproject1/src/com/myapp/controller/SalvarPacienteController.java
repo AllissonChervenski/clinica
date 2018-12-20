@@ -1,5 +1,6 @@
 package com.myapp.controller;
 
+import com.myapp.model.Paciente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,13 +12,10 @@ public class SalvarPacienteController implements ActionListener{
 	
 	private CadastroPaciente cadastroPaciente;
 	
-	private Pessoa paciente;
+	private Paciente paciente;
 	
-	public SalvarPacienteController(
-			CadastroPaciente cadastroPaciente, 
-			Pessoa paciente) {
-		
-		this.paciente=paciente;
+	public SalvarPacienteController(CadastroPaciente cadastroPaciente, Paciente paciente) {
+		this.paciente = paciente;
 		this.cadastroPaciente = cadastroPaciente;
 	}
 	
@@ -27,14 +25,17 @@ public class SalvarPacienteController implements ActionListener{
 		//Passo 1: recuperar dados da tela/view
 		//Passo 2: passar os dados para dentro de paciente
 		
-		this.cadastroPaciente.bindPessoa();
+		this.cadastroPaciente.bindPaciente();
 		
-		if(paciente.getNome() != null && !paciente.getNome().trim().equals("")) {
+		if(paciente.getNome() != null && !paciente.getNome().trim().equals("") ) {
 			//Passo 3: salva essa p....
-			System.out.println("Gravando dados da paciente " + paciente.getNome());
-			if(paciente.getEndereco() != null) {
-				System.out.println("Gravando dados do endereco da paciente " + paciente.getEndereco().getRua());
-			}
+			System.out.println("Gravando dados do paciente " + paciente.getNome());
+                        if(paciente.getEndereco() != null) {
+                            System.out.println("Gravando dados do endereco do paciente " + paciente.getEndereco().getRua());
+			if(paciente.getDataNascimento() != null){
+                            System.out.println("Gravando dados da data de nascimento do paciente " + paciente.getDataNascimento().toString());
+                        }
+                        }
 		}
 		
 		cadastroPaciente.notifyCadastroSucesso();

@@ -8,7 +8,6 @@ package com.myapp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 /**
  *
  * @author ultra
@@ -20,15 +19,7 @@ public class PessoaFisica extends Pessoa{
     @Id
     @GeneratedValue
     private int id;
-    private Pessoa pessoa;
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+   
     public int getId() {
         return id;
     }

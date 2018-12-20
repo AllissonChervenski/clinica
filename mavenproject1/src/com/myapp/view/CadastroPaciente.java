@@ -16,14 +16,14 @@ import javax.swing.JTextField;
 import com.myapp.controller.SalvarPacienteController;
 import com.myapp.model.Endereco;
 import com.myapp.model.Paciente;
-import com.myapp.model.Pessoa;
+import java.util.Date;
 
 public class CadastroPaciente extends JFrame {
 
     public static final Dimension TAMANHO = new Dimension(600, 400);
 
     private JPanel painelPrincipal;
-    private Pessoa pessoa;
+    private Paciente paciente;
     private JPanel painelConteudo;
     private JLabel labelNome;
     private JLabel labelDataNascimento;
@@ -43,11 +43,11 @@ public class CadastroPaciente extends JFrame {
     public void setDtnTextField(JTextField dtnTextField) {
         this.dtnTextField = dtnTextField;
     }
-    private JButton novaPessoa;
+    private JButton novoPaciente;
 
-    public CadastroPaciente(Pessoa pessoa) {
-        setTitle("Cadastrar Funcion�rio");
-        this.pessoa = pessoa;
+    public CadastroPaciente(Paciente paciente) {
+        setTitle("Cadastrar Paciente");
+        this.paciente = paciente;
         setSize(TAMANHO);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         painelPrincipal = new JPanel();
@@ -131,34 +131,40 @@ public class CadastroPaciente extends JFrame {
         telefoneTextField.setLocation(150, 140);
         painelConteudo.add(telefoneTextField);
 
-        ActionListener al = new SalvarPacienteController(this, pessoa);
+        ActionListener al = new SalvarPacienteController(this, paciente);
 
         btSalvar.addActionListener(al);
 
-        novaPessoa = new JButton("Nova");
-        jp.add(novaPessoa);
+        novoPaciente = new JButton("Nova");
+        jp.add(novoPaciente);
 
-        novaPessoa.addActionListener(new ActionListener() {
+        novoPaciente.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                novaPessoa();
+                novoPaciente();
             }
         });
 
     }
 
     public static void main(String args[]) {
-        Pessoa p = new Paciente();
+        Paciente p = new Paciente();
         p.setNome("Fabio");
 
         Endereco end = new Endereco();
-        end.setRua("Joz� Bonif�cio");
-
+        end.setRua("Jose Bonifácio");
+        
+        Date dataNascimento = new Date();
+        p.setDataNascimento(dataNascimento);
+        
+        p.setEmail("paciente@gmail.com");
+        p.setTelefone("99047583");
+       
         p.setEndereco(end);
 
         CadastroPaciente cf = new CadastroPaciente(p);
-        cf.editPessoa();
+        cf.editPaciente();
         cf.setVisible(true);
     }
 
@@ -219,23 +225,32 @@ public class CadastroPaciente extends JFrame {
     }
 
     public void notifyCadastroSucesso() {
-        JOptionPane.showMessageDialog(this, "Pessoa " + "" + pessoa.getNome() + " " + "cadastrada com sucesso");
-        setTitle("Edi��o de Funcion�rio");
+        JOptionPane.showMessageDialog(this, "Paciente " + "" + paciente.getNome() + " " + "cadastrado com sucesso");
+        setTitle("Edição de paciente");
         btSalvar.setText("Atualizar");
     }
 
-    public void novaPessoa() {
-        pessoa.setId(0);
-        pessoa.setNome("");
-        pessoa.getEndereco().setId(0);
-        pessoa.getEndereco().setRua("");
-        editPessoa();
+    public void novoPaciente() {
+        paciente.setId(0);
+        paciente.setNome("");
+        paciente.getEndereco().setId(0);
+        paciente.getEndereco().setRua("");
+        paciente.setEmail("");
+        paciente.setTelefone("");
+        editPaciente();
     }
-
-    public void editPessoa() {
-        getNomeTextField().setText(pessoa.getNome());
-        getEnderecoTextField().setText(pessoa.getEndereco().getRua());
-        if (pessoa.getNome() == null || pessoa.getNome().trim().equals("")) {
+     public void bindPaciente() {
+        paciente.setNome(this.getNomeTextField().getText());
+        paciente.getEndereco().setRua(this.getEnderecoTextField().getText());
+    }
+    public void editPaciente() {
+        getNomeTextField().setText(paciente.getNome());
+        getEnderecoTextField().setText(paciente.getEndereco().getRua());
+        getDtnTextField().setText(paciente.getDataNascimento().toString());
+        getEmailTextField().setText(paciente.getEmail());
+        getTelefoneTextField().setText(paciente.getTelefone());
+        
+        if (paciente.getNome() == null || paciente.getNome().trim().equals("")) {
             btSalvar.setText("Salvar");
         } else {
             btSalvar.setText("Atualizar");
@@ -275,10 +290,6 @@ public class CadastroPaciente extends JFrame {
         this.telefoneTextField = telefoneTextField;
     }
 
-    public void bindPessoa() {
-        pessoa.setNome(this.getNomeTextField().getText());
-        pessoa.getEndereco().setRua(this.getEnderecoTextField().getText());
-    }
 
     public JLabel getLabelDataNascimento() {
         return labelDataNascimento;

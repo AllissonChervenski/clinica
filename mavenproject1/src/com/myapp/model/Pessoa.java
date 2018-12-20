@@ -30,7 +30,7 @@ public abstract class Pessoa {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@OneToOne(mappedBy="pessoa",cascade= {CascadeType.REMOVE,CascadeType.MERGE} )
+	@OneToOne(cascade= {CascadeType.REMOVE,CascadeType.MERGE} )
 	private Endereco endereco;
 
     public Date getDataNascimento() {
