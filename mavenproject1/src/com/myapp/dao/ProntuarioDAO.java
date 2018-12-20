@@ -1,7 +1,6 @@
 package com.myapp.dao;
 
 import com.myapp.model.Prontuario;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +10,7 @@ import java.util.List;
 public class ProntuarioDAO
 {
 
-    public boolean insertProntuario(Prontuario item, int id) {
+    public boolean insertProntuario(Prontuario item) {
         String sql = "INSERT INTO `prontuario` (`avaliacao`, `subjetivo`, `objetivo`) VALUES( ?, ?, ? )";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
@@ -58,7 +57,7 @@ public class ProntuarioDAO
     }
 
     public boolean updateProntuario(Prontuario item) {
-        String sql = "UPDATE `prontuario` SET `salarioBase` = ? WHERE `prontuario`.`id` = ? ";
+        String sql = "UPDATE `prontuario` SET `avaliacao` = ?, `objetivo` = ?, `subjetivo` = ? WHERE `prontuario`.`id` = ? ";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
             java.sql.PreparedStatement ps = conexao.prepareStatement(sql);

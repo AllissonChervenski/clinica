@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,6 +15,7 @@ import javax.swing.JTextField;
 
 import com.myapp.controller.SalvarProntuarioController;
 import com.myapp.model.Prontuario;
+import com.myapp.dao.ProntuarioDAO;
 
 public class CadastroProntuario extends JFrame
 {
@@ -113,7 +113,15 @@ public class CadastroProntuario extends JFrame
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                novoProntuario();
+                ProntuarioDAO dao = new ProntuarioDAO();
+                Prontuario prontuarios = new Prontuario();
+                
+                prontuarios.setAvaliacao(avaliacaoTextField.getText());
+                prontuarios.setObjetivo(objetivoTextField.getText());
+                prontuarios.setSubjetivo(subjetivoTextField.getText());
+                
+                dao.insertProntuario(prontuarios);
+//                novoProntuario();
             }
         });
 

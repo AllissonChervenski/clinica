@@ -191,7 +191,6 @@ public class CadastroEmpregado extends JFrame {
     public void novaPessoa() {
         pessoa.setId(0);
         pessoa.setNome("");
-        pessoa.getEndereco().setId(0);
         pessoa.getEndereco().setRua("");
         editPessoa();
     }
