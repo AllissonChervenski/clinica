@@ -6,6 +6,7 @@
 package com.myapp.view;
 
 import com.myapp.controller.SalvarEnderecoController;
+import com.myapp.dao.EnderecoDAO;
 import com.myapp.model.Endereco;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -37,7 +38,7 @@ public class CadastroEndereco extends JFrame {
         private JTextField bairroJTextField;
         private JTextField ufJTextField;
         private JTextField cidadeJTextField;
-        private JButton btSalvar;
+ //       private JButton btSalvar;
         private JButton novoEndereco;
         private Endereco endereco;
         
@@ -48,12 +49,12 @@ public class CadastroEndereco extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         painelPrincipal = new JPanel();
         setContentPane(painelPrincipal);
-        btSalvar = new JButton("Salvar/Atualizar");
+//        btSalvar = new JButton("Salvar/Atualizar");
 
 //		painelPrincipal.setLayout(null);
         painelPrincipal.setLayout(new BorderLayout());
-        btSalvar.setLocation(250, 0);
-        btSalvar.setSize(100, 20);
+ //       btSalvar.setLocation(250, 0);
+//        btSalvar.setSize(100, 20);
 
 //		painelPrincipal.add(btSalvar,BorderLayout.SOUTH);
         JButton cancel = new JButton("Cancelar");
@@ -62,7 +63,7 @@ public class CadastroEndereco extends JFrame {
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout());
 
-        jp.add(btSalvar);
+//        jp.add(btSalvar);
         jp.add(cancel);
         painelPrincipal.add(jp, BorderLayout.SOUTH);
 
@@ -129,14 +130,28 @@ public class CadastroEndereco extends JFrame {
 
         ActionListener al = new SalvarEnderecoController(this, endereco);
 
-        btSalvar.addActionListener(al);
+        
 
-        novoEndereco = new JButton("Novo");
+        novoEndereco = new JButton("Salvar");
         jp.add(novoEndereco);
-
+        
+        novoEndereco.addActionListener(al);
+        
         novoEndereco.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                EnderecoDAO dao = new EnderecoDAO();
+                Endereco endereco = new Endereco();
+                
+                int numero = Integer.parseInt(numeroJTextField.getText());
+                endereco.setNumero(numero);
+                endereco.setBairro(bairroJTextField.getText());
+                endereco.setCidade(cidadeJTextField.getText());
+                endereco.setRua(ruaJTextField.getText());
+                endereco.setUf(ufJTextField.getText());
+
+                dao.insertEndereco(endereco);
+                
                 novoEndereco();
             }
         });
@@ -146,13 +161,13 @@ public class CadastroEndereco extends JFrame {
         Endereco end = new Endereco();
    
         CadastroEndereco ce = new CadastroEndereco(end);
-        ce.editEndereco();
+//        ce.editEndereco();
         ce.setVisible(true);
     }
           public void notifyCadastroSucesso() {
         JOptionPane.showMessageDialog(this, "Endereco " + "" + endereco.getRua()+ " " + "cadastrado com sucesso");
         setTitle("Edição de endereco");
-        btSalvar.setText("Atualizar");
+  //      btSalvar.setText("Atualizar");
     }
 
     public void novoEndereco() {
@@ -162,21 +177,21 @@ public class CadastroEndereco extends JFrame {
         endereco.setNumero(0);
         endereco.setUf("");
         endereco.setCidade("");
-        editEndereco();
+//        editEndereco();
     }
 
-    public void editEndereco() {
-        getRuaJTextField().setText(endereco.getRua());
-        getBairroJTextField().setText(endereco.getBairro());
-        getCidadeJTextField().setText(endereco.getCidade());
-        getUfJTextField().setText(endereco.getUf());
-        getNumeroJTextField().setText(Integer.toString(endereco.getNumero()));
-        if (endereco.getRua() == null || endereco.getRua().trim().equals("")) {
-            btSalvar.setText("Salvar");
-        } else {
-            btSalvar.setText("Atualizar");
-        }
-    }
+//    public void editEndereco() {
+//        getRuaJTextField().setText(endereco.getRua());
+//        getBairroJTextField().setText(endereco.getBairro());
+//        getCidadeJTextField().setText(endereco.getCidade());
+//        getUfJTextField().setText(endereco.getUf());
+//        getNumeroJTextField().setText(Integer.toString(endereco.getNumero()));
+//        if (endereco.getRua() == null || endereco.getRua().trim().equals("")) {
+//            btSalvar.setText("Salvar");
+//        } else {
+//            btSalvar.setText("Atualizar");
+//        }
+//    }
     
     public void bindEndereco() {
         endereco.setRua(this.getRuaJTextField().getText());
@@ -281,13 +296,13 @@ public class CadastroEndereco extends JFrame {
         this.cidadeJTextField = cidadeJTextField;
     }
 
-    public JButton getBtSalvar() {
-        return btSalvar;
-    }
-
-    public void setBtSalvar(JButton btSalvar) {
-        this.btSalvar = btSalvar;
-    }
+//    public JButton getBtSalvar() {
+//        return btSalvar;
+//    }
+//
+//    public void setBtSalvar(JButton btSalvar) {
+//        this.btSalvar = btSalvar;
+//    }
 
     public Endereco getEndereco() {
         return endereco;
