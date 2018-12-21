@@ -2,6 +2,7 @@ package com.myapp.dao;
 
 import com.boraji.tutorial.hibernate.JPAUtil;
 import com.myapp.model.Endereco;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 
 public class EnderecoDAO {
@@ -33,6 +34,14 @@ public class EnderecoDAO {
             ex.printStackTrace();
             return false;
         }
+    }
+    public Collection<Endereco> selectAll() {
+        String oql = "From " + Endereco.class.getName() +"";
+        Collection<Endereco> listDados = null;
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+	listDados= entityManager.createQuery(oql).getResultList();
+	entityManager.close();
+        return listDados;
     }
 
 }
