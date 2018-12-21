@@ -21,4 +21,18 @@ public class EnderecoDAO {
         }
     }
 
+    public boolean deleteEndereco(Endereco endereco) {
+        try {
+            EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+            entityManager.getTransaction().begin();
+            endereco = entityManager.find(Endereco.class, endereco.getId());
+            entityManager.remove(endereco);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
 }
