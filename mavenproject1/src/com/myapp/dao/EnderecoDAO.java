@@ -35,13 +35,29 @@ public class EnderecoDAO {
             return false;
         }
     }
+
     public Collection<Endereco> selectAll() {
-        String oql = "From " + Endereco.class.getName() +"";
+        String oql = "From " + Endereco.class.getName() + "";
         Collection<Endereco> listDados = null;
         EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-	listDados= entityManager.createQuery(oql).getResultList();
-	entityManager.close();
+        listDados = entityManager.createQuery(oql).getResultList();
+        entityManager.close();
         return listDados;
     }
 
+    public boolean updateEndereco(Endereco endereco) {
+        try {
+            EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.merge(endereco);
+            entityManager.getTransaction().commit();
+
+            return true;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
 }

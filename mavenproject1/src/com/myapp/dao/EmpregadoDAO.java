@@ -10,7 +10,7 @@ public class EmpregadoDAO {
     public boolean insertEmpregado(Empregado empregado) {
         try {
             EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
-            
+
             entityManager.getTransaction().begin();
             entityManager.persist(empregado);
             entityManager.getTransaction().commit();
@@ -42,5 +42,21 @@ public class EmpregadoDAO {
         listDados = entityManager.createQuery(oql).getResultList();
         entityManager.close();
         return listDados;
+    }
+
+    public boolean updateEmpregado(Empregado empregado) {
+        try {
+            EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.merge(empregado);
+            entityManager.getTransaction().commit();
+
+            return true;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
     }
 }
