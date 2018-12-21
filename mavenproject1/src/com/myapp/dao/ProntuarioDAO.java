@@ -2,14 +2,8 @@ package com.myapp.dao;
 
 import com.boraji.tutorial.hibernate.JPAUtil;
 import com.myapp.model.Prontuario;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 public class ProntuarioDAO
 {
@@ -32,10 +26,15 @@ public class ProntuarioDAO
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Prontuario> findAll()
+    public Collection<Prontuario> selectAll()
     {
-        return entityManager.createQuery("FROM " + Prontuario.class.getName()).getResultList();
+        String oql = "From " + Prontuario.class.getName() + "";
+        Collection<Prontuario> listDados = null;
+        EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+        listDados = entityManager.createQuery(oql).getResultList();
+        entityManager.close();
+        
+        return listDados;
     }
 
     public boolean updateProntuario(Prontuario prontuario)
