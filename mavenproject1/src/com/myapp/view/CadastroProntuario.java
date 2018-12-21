@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import com.myapp.controller.SalvarProntuarioController;
 import com.myapp.model.Prontuario;
 import com.myapp.dao.ProntuarioDAO;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CadastroProntuario extends JFrame
 {
@@ -26,10 +28,12 @@ public class CadastroProntuario extends JFrame
     private Prontuario prontuario;
 
     private JPanel painelConteudo;
+    private JLabel labelData;
     private JLabel labelObjetivo;
     private JLabel labelSubjetivo;
     private JLabel labelAvaliacao;
 //    private JButton btSalvar;
+    private JTextField dataTextField;
     private JTextField objetivoTextField;
     private JTextField subjetivoTextField;
     private JTextField avaliacaoTextField;
@@ -96,6 +100,16 @@ public class CadastroProntuario extends JFrame
         avaliacaoTextField.setSize(400, 20);
         avaliacaoTextField.setLocation(150, 80);
         painelConteudo.add(avaliacaoTextField);
+        
+        labelData = new JLabel("Data:");
+        labelData.setSize(100, 20);
+        labelData.setLocation(10, 80);
+        painelConteudo.add(labelData);
+
+        dataTextField = new JTextField();
+        dataTextField.setSize(400, 20);
+        dataTextField.setLocation(150, 80);
+        painelConteudo.add(dataTextField);
 
         painelPrincipal.add(painelConteudo);
 
@@ -107,22 +121,6 @@ public class CadastroProntuario extends JFrame
         novoProntuario.setSize(100, 20);
         jp.add(novoProntuario);
 
-//        btSalvar.addActionListener(new ActionListener()
-//        {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                ProntuarioDAO dao = new ProntuarioDAO();
-//                Prontuario prontuarios = new Prontuario();
-//
-//                prontuarios.setAvaliacao(avaliacaoTextField.getText());
-//                prontuarios.setObjetivo(objetivoTextField.getText());
-//                prontuarios.setSubjetivo(subjetivoTextField.getText());
-//
-//                dao.insertProntuario(prontuarios);
-////                novoProntuario();
-//            }
-//        });
         novoProntuario.addActionListener(al);
 
         novoProntuario.addActionListener(new ActionListener()
@@ -132,7 +130,7 @@ public class CadastroProntuario extends JFrame
             public void actionPerformed(ActionEvent e) {
                 ProntuarioDAO dao = new ProntuarioDAO();
                 Prontuario prontuarios = new Prontuario();
-
+                
                 prontuarios.setAvaliacao(avaliacaoTextField.getText());
                 prontuarios.setObjetivo(objetivoTextField.getText());
                 prontuarios.setSubjetivo(subjetivoTextField.getText());

@@ -1,5 +1,6 @@
 package com.myapp.dao;
 
+import com.boraji.tutorial.hibernate.JPAUtil;
 import com.myapp.model.Paciente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,10 +8,25 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
 
-public class PacienteDAO {
+public class PacienteDAO
+{
 
-//    public boolean insertPaciente(Paciente item) {
+    public boolean insertPaciente(Paciente paciente)
+    {
+        try {
+            EntityManager entityManager = JPAUtil.getEntityManagerFactory().createEntityManager();
+            entityManager.getTransaction().begin();
+            entityManager.persist(paciente);
+            entityManager.getTransaction().commit();
+
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            return false;
+        }
 //        String sql = "INSERT INTO `paciente` (`id_pessoa`, `nascimento`, `email`,`telefone`) VALUES( 1 , ? , ? ,?)";
 //        java.sql.Connection conexao = ConnectDataBase.getConexao();
 //        try {
@@ -32,7 +48,7 @@ public class PacienteDAO {
 //            return false;
 //        }
 //
-//    }
+    }
 
 //    public List<String[]> selectAll() {
 //        String sql = "SELECT * FROM paciente";
@@ -60,8 +76,8 @@ public class PacienteDAO {
 //        }
 //        return listDados;
 //    }
-
-    public boolean updatePaciente(Paciente item) {
+    public boolean updatePaciente(Paciente item)
+    {
         String sql = "UPDATE `paciente` SET  `email` = ? , `telefone` = ? WHERE `paciente`.`id` = ? ";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
@@ -81,7 +97,8 @@ public class PacienteDAO {
 
     }
 
-    public boolean deletePaciente(Paciente item) {
+    public boolean deletePaciente(Paciente item)
+    {
         String sql = "DELETE FROM `paciente` WHERE `paciente`.`id` = ? ";
         java.sql.Connection conexao = ConnectDataBase.getConexao();
         try {
