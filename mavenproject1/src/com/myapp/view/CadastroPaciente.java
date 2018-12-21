@@ -134,7 +134,7 @@ public class CadastroPaciente extends JFrame {
                     paciente.setTelefone(telefoneTextField.getText());
                     paciente.setEmail(emailTextField.getText());
                     paciente.setNome(nomeTextField.getText());
-                    dao.insertPaciente(paciente);
+//                    dao.insertPaciente(paciente);
                     //novoPaciente();
                 
             }
